@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 
 /**
  * TODO: Write more unit tests to test the implementation of ArrayIntQueue
+ * 
  * for the {@link LinkedIntQueue} and
  * {@link ArrayIntQueue} classes, as described in the handout. The
  * {@link ArrayIntQueue} class contains a few bugs. Use the tests you wrote for
@@ -24,7 +25,7 @@ import static org.junit.Assert.*;
  */
 public class IntQueueTest {
 
-    private IntQueue mQueue;
+    private IntQueue ArrayIntQueue;
     private List<Integer> testList;
 
     /**
@@ -33,50 +34,50 @@ public class IntQueueTest {
     @Before
     public void setUp() {
         // comment/uncomment these lines to test each class
-        mQueue = new LinkedIntQueue();
-//        mQueue = new ArrayIntQueue();
+        ArrayIntQueue = new LinkedIntQueue();
+//        ArrayIntQueue = new ArrayIntQueue();
 
         testList = new ArrayList<>(List.of(1, 2, 3));
     }
 
     @Test
     public void testIsEmpty() {
-        assertTrue(mQueue.isEmpty());
+        assertTrue(ArrayIntQueue.isEmpty());
     }
 
     @Test
     public void testNotEmpty() {
-        mQueue.enqueue(1);
-        assertFalse(mQueue.isEmpty());
+        ArrayIntQueue.enqueue(1);
+        assertFalse(ArrayIntQueue.isEmpty());
     }
 
     @Test
     public void testPeekEmptyQueue() {
-        assertNull(mQueue.peek());
+        assertNull(ArrayIntQueue.peek());
     }
 
     @Test
     public void testPeekNoEmptyQueue() {
         Integer input = 1;
-        mQueue.enqueue(input);
-        assertEquals(input, mQueue.peek());
+        ArrayIntQueue.enqueue(input);
+        assertEquals(input, ArrayIntQueue.peek());
     }
 
     @Test
     public void testEnqueue() {
         for (int i = 0; i < testList.size(); i++) {
-            mQueue.enqueue(testList.get(i));
-            assertEquals(testList.get(0), mQueue.peek());
-            assertEquals(i + 1, mQueue.size());
+            ArrayIntQueue.enqueue(testList.get(i));
+            assertEquals(testList.get(0), ArrayIntQueue.peek());
+            assertEquals(i + 1, ArrayIntQueue.size());
         }
     }
 
     @Test
     public void testDequeue() {
-        testList.forEach(n -> mQueue.enqueue(n));
+        testList.forEach(n -> ArrayIntQueue.enqueue(n));
         for (int i = 0; i < testList.size(); i++) {
-            assertEquals(testList.get(i), mQueue.dequeue());
-            assertEquals(testList.size() - i - 1, mQueue.size());
+            assertEquals(testList.get(i), ArrayIntQueue.dequeue());
+            assertEquals(testList.size() - i - 1, ArrayIntQueue.size());
         }
     }
 
@@ -91,14 +92,24 @@ public class IntQueueTest {
                 int input = scanner.nextInt();
                 correctResult.add(input);
                 System.out.println("enqueue: " + input);
-                mQueue.enqueue(input);
+                ArrayIntQueue.enqueue(input);
             }
 
             for (Integer result : correctResult) {
-                assertEquals(mQueue.dequeue(), result);
+                assertEquals(ArrayIntQueue.dequeue(), result);
             }
         }
     }
 
-
+    // more test case 
+    @Test
+    public void  testClear() {
+        // Test the clear method
+        ArrayIntQueue.enqueue(1);
+        ArrayIntQueue.enqueue(2);
+        ArrayIntQueue.enqueue(3);
+        ArrayIntQueue.clear();
+        assertTrue(ArrayIntQueue.isEmpty());
+        assertEquals(0, ArrayIntQueue.size());
+    }
 }
